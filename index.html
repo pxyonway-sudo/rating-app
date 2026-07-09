@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Feedback Kiosk App</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f0f4f8; 
+            margin: 0; 
+            padding: 40px 20px;
+            user-select: none;
+        }
+        .container { max-width: 850px; margin: 0 auto; }
+        
+        /* Banner Styles */
+        .dept-banner { background: #1e3a8a; color: white; padding: 15px; border-radius: 12px; font-size: 28px; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
+        .dept-subtitle { color: #64748b; font-size: 16px; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        /* Box Heading Styles */
+        h1 { color: #1e293b; font-size: 34px; margin-bottom: 8px; }
+        .box-subtitle { color: #64748b; font-size: 18px; margin-bottom: 40px; font-weight: normal; }
+        h3 { color: #1e293b; margin-bottom: 30px; font-size: 24px; line-height: 1.4; }
+        
+        /* Feedback Cards */
+        .feedback-card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); min-height: 400px; display: none; flex-direction: column; justify-content: center; position: relative; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        /* Smileys Layout */
+        .emoji-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+        .emoji-box { display: flex; flex-direction: column; align-items: center; background: #f8fafc; padding: 25px 15px; border-radius: 20px; width: 120px; cursor: pointer; transition: 0.2s; border: 2px solid #e2e8f0; }
+        .emoji-box:active { transform: scale(0.93); background-color: #f1f5f9; }
+        .emoji { font-size: 65px; margin-bottom: 10px; }
+        .label { font-size: 16px; font-weight: bold; text-transform: uppercase; }
+        
+        /* Buttons Grid */
+        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; }
+        .reason-btn { background: #f8fafc; border: 2px solid #cbd5e1; padding: 22px 15px; border-radius: 16px; font-size: 16px; font-weight: bold; color: #475569; cursor: pointer; transition: 0.2s; }
+        .reason-btn:active { background: #cbd5e1; transform: scale(0.97); }
+        
+        /* Comment & Submit */
+        textarea { width: 100%; height: 140px; padding: 15px; border-radius: 12px; border: 2px solid #cbd5e1; font-size: 18px; box-sizing: border-box; resize: none; margin-bottom: 20px; }
+        
+        /* Button Layout for Step 3 */
+        .btn-row { display: flex; justify-content: center; gap: 15px; }
+        
+        /* Action Buttons */
+        .submit-btn { background: #1e3a8a; color: white; border: none; padding: 18px 60px; font-size: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+        .submit-btn:active { background: #0f172a; }
+        
+        /* Back Button Style */
+        .back-btn { background: #64748b; color: white; border: none; padding: 18px 40px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+        .back-btn:active { background: #334155; }
+        
+        /* Corner Back Button for Box 2 */
+        .corner-back { position: absolute; top: 25px; left: 25px; background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; }
+        .corner-back:active { background: #cbd5e1; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Banner နှင့် ၎င်းအောက်က စာသား -->
+    <div id="deptDisplay" class="dept-banner">LOADING DEPT...</div>
+    <div class="dept-subtitle">We are here to serve you better.</div>
+
+    <!-- BOX ၁ - How was your service? ပင်မဘောင်ကြီး -->
+    <div id="box1" class="feedback-card" style="display: flex;">
+        <h1>How was your service today?</h1>
+        <div class="box-subtitle">Your feedback helps us improve.</div>
+        
+        <div class="emoji-row">
+            <div class="emoji-box" onclick="selectScore(5, 'Excellent')"><span class="emoji">😍</span><span class="label" style="color:#22c55e">EXCELLENT</span></div>
+            <div class="emoji-box" onclick="selectScore(4, 'Good')"><span class="emoji">😊</span><span class="label" style="color:#eab308">GOOD</span></div>
+            <div class="emoji-box" onclick="selectScore(3, 'Fair')"><span class="emoji">😐</span><span class="label" style="color:#f97316">FAIR</span></div>
+            <div class="emoji-box" onclick="selectScore(2, 'Poor')"><span class="emoji">😞</span><span class="label" style="color:#ef4444">POOR</span></div>
+        </div>
+    </div>
+
+    <!-- BOX ၂ - What can we improve? ဘောင်ကြီး (ဘယ်ဘက်အပေါ်ထောင့်တွင် Back ပါဝင်သည်) -->
+    <div id="box2" class="feedback-card">
+        <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
+        <h3>What can we improve?<br><span style="font-weight:normal; font-size:18px; color:#64748b">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
+        <div class="reason-grid">
+            <button class="reason-btn" onclick="selectReason('Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:14px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
+            <button class="reason-btn" onclick="selectReason('Staff attitude')">Staff attitude<br><span style="font-weight:normal; font-size:14px; color:#64748b">(ဝန်ထမ်း ဆက်ဆံရေး)</span></button>
+            <button class="reason-btn" onclick="selectReason('Information not clear')">Information not clear<br><span style="font-weight:normal; font-size:14px; color:#64748b">(သတင်းအချက်အလက် မရှင်းလင်းခြင်း)</span></button>
+            <button class="reason-btn" onclick="selectReason('Other')">Other (Please specify)<br><span style="font-weight:normal; font-size:14px; color:#64748b">(အခြားအကြောင်းအရာ ရေးရန်)</span></button>
+        </div>
+    </div>
+
+    <!-- BOX ၃ - Any additional comments? စာရေးရမည့်ဘောင်ကြီး (အောက်ခြေတွင် Back ပါဝင်သည်) -->
+    <div id="box3" class="feedback-card">
+        <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#64748b">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
+        <textarea id="commentText" placeholder="Type your comments here..."></textarea>
+        <br>
+        <div class="btn-row">
+            <button class="back-btn" onclick="goBack(2)">⬅ BACK</button>
+            <button class="submit-btn" onclick="submitData()">SUBMIT</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedScore = "";
+    let selectedReason = "";
+    let currentDepartment = "General Desk";
+
+    // URL ကနေ ?dept= နာမည်ကို ဖတ်သည့်အပိုင်း
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const deptParam = urlParams.get('dept');
+        if (deptParam) {
+            currentDepartment = deptParam.replace(/([A-Z])/g, ' $1').trim();
+        }
+        document.getElementById('deptDisplay').innerText = currentDepartment;
+    };
+
+    function selectScore(scoreNum, scoreLabel) {
+        selectedScore = scoreNum + " - " + scoreLabel;
+        selectedReason = "";
+        document.getElementById('commentText').value = "";
+
+        if (scoreNum >= 4) {
+            selectedReason = "No issue";
+            submitData();
+        } else {
+            document.getElementById('box1').style.display = 'none';
+            document.getElementById('box2').style.display = 'flex';
+        }
+    }
+
+    function selectReason(reason) {
+        selectedReason = reason;
+        if (reason === 'Other') {
+            document.getElementById('box2').style.display = 'none';
+            document.getElementById('box3').style.display = 'flex';
+        } else {
+            submitData();
+        }
+    }
+
+    // Back ခလုတ်နှိပ်ပါက နောက်သို့ပြန်သွားရန် လုပ်ဆောင်ချက်
+    function goBack(step) {
+        if (step === 1) {
+            // Box 2 မှ Box 1 သို့ပြန်သွားခြင်း
+            document.getElementById('box2').style.display = 'none';
+            document.getElementById('box1').style.display = 'flex';
+        } else if (step === 2) {
+            // Box 3 မှ Box 2 သို့ပြန်သွားခြင်း
+            document.getElementById('box3').style.display = 'none';
+            document.getElementById('box2').style.display = 'flex';
+        }
+    }
+
+    function submitData() {
+        const url = 'https://sheetdb.io/api/v1/n78wo86ue74qv'; // သင့်ရဲ့ SheetDB API URL ကို ဒီနေရာမှာ ထည့်ပါ
+        const comment = document.getElementById('commentText').value;
+
+        const payload = {
+            "data": [{
+                "Date": new Date().toLocaleString(),
+                "Department": currentDepartment, 
+                "Score": selectedScore,
+                "Reason": selectedReason,
+                "Comment": comment
+            }]
+        };
+
+        if(url !== 'YOUR_API_URL') {
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("Thank you for your feedback! ကျေးဇူးတင်ပါတယ်ခင်ဗျာ။");
+                resetApp();
+            }).catch(err => {
+                alert("Network error, please try again.");
+            });
+        } else {
+            alert("စမ်းသပ်မှု အောင်မြင်သည်! (ဌာန- " + currentDepartment + " | ရမှတ်- " + selectedScore + ")");
+            resetApp();
+        }
+    }
+
+    function resetApp() {
+        document.getElementById('box2').style.display = 'none';
+        document.getElementById('box3').style.display = 'none';
+        document.getElementById('box1').style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>
