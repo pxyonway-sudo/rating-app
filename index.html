@@ -46,35 +46,46 @@
         
         /* Comment & Submit */
         textarea { width: 100%; height: 140px; padding: 15px; border-radius: 12px; border: 2px solid #cbd5e1; font-size: 18px; box-sizing: border-box; resize: none; margin-bottom: 20px; }
-        
-        /* Button Layout for Step 3 */
         .btn-row { display: flex; justify-content: center; gap: 15px; }
         
         /* Action Buttons */
         .submit-btn { background: #1e3a8a; color: white; border: none; padding: 18px 60px; font-size: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
         .submit-btn:active { background: #0f172a; }
-        
-        /* Back Button Style */
         .back-btn { background: #64748b; color: white; border: none; padding: 18px 40px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
         .back-btn:active { background: #334155; }
-        
-        /* Corner Back Button for Box 2 */
         .corner-back { position: absolute; top: 25px; left: 25px; background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; }
-        .corner-back:active { background: #cbd5e1; }
+        
+        /* 🔔 Custom Alarm/Toast Box ပုံစံအသစ် */
+        .custom-alarm {
+            display: none;
+            position: fixed;
+            top: -100px; /* အပေါ်ကနေ ဝှက်ထားမည် */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #22c55e; /* အစိမ်းရောင် */
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+            z-index: 9999;
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .custom-alarm.show { top: 30px; /* အပေါ်ကနေ လျှောကျလာမည့်နေရာ */ }
     </style>
 </head>
 <body>
 
+<div id="alarmBox" class="custom-alarm">💚 Thank you for your support!</div>
+
 <div class="container">
-    <!-- Banner နှင့် ၎င်းအောက်က စာသား -->
     <div id="deptDisplay" class="dept-banner">LOADING DEPT...</div>
     <div class="dept-subtitle">We are here to serve you better.</div>
 
-    <!-- BOX ၁ - How was your service? ပင်မဘောင်ကြီး -->
     <div id="box1" class="feedback-card" style="display: flex;">
         <h1>How was your service today?</h1>
         <div class="box-subtitle">Your feedback helps us improve.</div>
-        
         <div class="emoji-row">
             <div class="emoji-box" onclick="selectScore(5, 'Excellent')"><span class="emoji">😍</span><span class="label" style="color:#22c55e">EXCELLENT</span></div>
             <div class="emoji-box" onclick="selectScore(4, 'Good')"><span class="emoji">😊</span><span class="label" style="color:#eab308">GOOD</span></div>
@@ -83,7 +94,6 @@
         </div>
     </div>
 
-    <!-- BOX ၂ - What can we improve? ဘောင်ကြီး (ဘယ်ဘက်အပေါ်ထောင့်တွင် Back ပါဝင်သည်) -->
     <div id="box2" class="feedback-card">
         <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
         <h3>What can we improve?<br><span style="font-weight:normal; font-size:18px; color:#64748b">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
@@ -95,7 +105,6 @@
         </div>
     </div>
 
-    <!-- BOX ၃ - Any additional comments? စာရေးရမည့်ဘောင်ကြီး (အောက်ခြေတွင် Back ပါဝင်သည်) -->
     <div id="box3" class="feedback-card">
         <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#64748b">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
         <textarea id="commentText" placeholder="Type your comments here..."></textarea>
@@ -112,7 +121,6 @@
     let selectedReason = "";
     let currentDepartment = "General Desk";
 
-    // URL ကနေ ?dept= နာမည်ကို ဖတ်သည့်အပိုင်း
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const deptParam = urlParams.get('dept');
@@ -146,21 +154,32 @@
         }
     }
 
-    // Back ခလုတ်နှိပ်ပါက နောက်သို့ပြန်သွားရန် လုပ်ဆောင်ချက်
     function goBack(step) {
         if (step === 1) {
-            // Box 2 မှ Box 1 သို့ပြန်သွားခြင်း
             document.getElementById('box2').style.display = 'none';
             document.getElementById('box1').style.display = 'flex';
         } else if (step === 2) {
-            // Box 3 မှ Box 2 သို့ပြန်သွားခြင်း
             document.getElementById('box3').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
         }
     }
 
+    // 🔔 Alarm Box လေးကို အပေါ်ကနေ လျှောချပြီး ပြသပေးမည့် Function
+    function showAlarmNotification() {
+        const alarm = document.getElementById('alarmBox');
+        alarm.style.display = 'block';
+        setTimeout(() => { alarm.classList.add('show'); }, 50); // ပြေပြေပြစ်ပြစ်ကျလာစေရန်
+
+        // ၂.၅ စက္ကန့်ပြည့်ရင် ပြန်ဝှက်ပြီး App ကို Reset လုပ်မည်
+        setTimeout(() => {
+            alarm.classList.remove('show');
+            setTimeout(() => { alarm.style.display = 'none'; }, 400);
+            resetApp();
+        }, 2500);
+    }
+
     function submitData() {
-        const url = 'https://sheetdb.io/api/v1/n78wo86ue74qv'; // သင့်ရဲ့ SheetDB API URL ကို ဒီနေရာမှာ ထည့်ပါ
+        const url = 'https://sheetdb.io/api/v1/n78wo86ue74qv'; // သင့်ရဲ့ SheetDB API URL ကို ထည့်ပါ
         const comment = document.getElementById('commentText').value;
 
         const payload = {
@@ -173,20 +192,17 @@
             }]
         };
 
+        // ခလုတ်နှိပ်လိုက်တာနဲ့ Alarm Box လေး ချက်ချင်း ကျလာမည်
+        showAlarmNotification();
+
         if(url !== 'YOUR_API_URL') {
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
-            }).then(() => {
-                alert("Thank you for your feedback! ကျေးဇူးတင်ပါတယ်ခင်ဗျာ။");
-                resetApp();
             }).catch(err => {
-                alert("Network error, please try again.");
+                console.log("Network error, API logged.");
             });
-        } else {
-            alert("စမ်းသပ်မှု အောင်မြင်သည်! (ဌာန- " + currentDepartment + " | ရမှတ်- " + selectedScore + ")");
-            resetApp();
         }
     }
 
