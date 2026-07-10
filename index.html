@@ -132,11 +132,11 @@
 
     function selectScore(scoreText, scoreNum) {
         window.currentScoreText = scoreText; 
-        window.currentReason = ""; // Excellent နှိပ်လျှင် Reason ကော်လံအတွက် Blank ထားမည်
+        window.currentReason = ""; 
         document.getElementById('commentText').value = ""; 
 
         if (scoreNum >= 4) {
-            submitData(); // Excellent သို့မဟုတ် Good ဖြစ်ပါက ချက်ချင်း ပို့မည်
+            submitData(); 
         } else {
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
@@ -176,19 +176,18 @@
     }
 
     function submitData() {
+        // [Line 166] သင်ပေးလိုက်တဲ့ API URL အသစ်စက်စက်ကို တိုက်ရိုက်ထည့်သွင်းပေးထားပါတယ်ဗျာ။
         const url = 'https://sheetdb.io/api/v1/u1motio6pf00c'; 
         const comment = document.getElementById('commentText').value;
 
         const now = new Date();
         const safeDateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-        // 🛠️ SheetDB စာလုံးအကြီးအသေး မသိဘဲ ငြင်းပယ်ခြင်းမှ ကာကွယ်ရန် Payload ထဲတွင် 'Score' နှင့် 'score' နှစ်မျိုးလုံး တွဲပို့ထားပါသည်
         const payload = {
             "data": [{
                 "Date": safeDateStr,
                 "Department": currentDepartment, 
-                "Score": window.currentScoreText,
-                "score": window.currentScoreText,
+                "Score": window.currentScoreText, 
                 "Reason": window.currentReason,   
                 "Comment": comment                
             }]
