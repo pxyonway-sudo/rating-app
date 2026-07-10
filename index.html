@@ -55,14 +55,14 @@
         .back-btn:active { background: #334155; }
         .corner-back { position: absolute; top: 25px; left: 25px; background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; }
         
-        /* 🔔 Custom Alarm/Toast Box ပုံစံအသစ် */
+        /* 🔔 Custom Alarm Box */
         .custom-alarm {
             display: none;
             position: fixed;
-            top: -100px; /* အပေါ်ကနေ ဝှက်ထားမည် */
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background: #22c55e; /* အစိမ်းရောင် */
+            background: #22c55e;
             color: white;
             padding: 18px 35px;
             border-radius: 50px;
@@ -72,7 +72,7 @@
             z-index: 9999;
             transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .custom-alarm.show { top: 30px; /* အပေါ်ကနေ လျှောကျလာမည့်နေရာ */ }
+        .custom-alarm.show { top: 30px; }
     </style>
 </head>
 <body>
@@ -87,10 +87,10 @@
         <h1>How was your service today?</h1>
         <div class="box-subtitle">Your feedback helps us improve.</div>
         <div class="emoji-row">
-            <div class="emoji-box" onclick="selectScore(5, 'Excellent')"><span class="emoji">😍</span><span class="label" style="color:#22c55e">EXCELLENT</span></div>
-            <div class="emoji-box" onclick="selectScore(4, 'Good')"><span class="emoji">😊</span><span class="label" style="color:#eab308">GOOD</span></div>
-            <div class="emoji-box" onclick="selectScore(3, 'Fair')"><span class="emoji">😐</span><span class="label" style="color:#f97316">FAIR</span></div>
-            <div class="emoji-box" onclick="selectScore(2, 'Poor')"><span class="emoji">😞</span><span class="label" style="color:#ef4444">POOR</span></div>
+            <div class="emoji-box" onclick="selectScore('Excellent', 5)"><span class="emoji">😍</span><span class="label" style="color:#22c55e">EXCELLENT</span></div>
+            <div class="emoji-box" onclick="selectScore('Good', 4)"><span class="emoji">😊</span><span class="label" style="color:#eab308">GOOD</span></div>
+            <div class="emoji-box" onclick="selectScore('Fair', 3)"><span class="emoji">😐</span><span class="label" style="color:#f97316">FAIR</span></div>
+            <div class="emoji-box" onclick="selectScore('Poor', 2)"><span class="emoji">😞</span><span class="label" style="color:#ef4444">POOR</span></div>
         </div>
     </div>
 
@@ -117,8 +117,8 @@
 </div>
 
 <script>
-    let selectedScore = "";
-    let selectedReason = "";
+    window.currentScoreText = "";
+    window.currentReason = "";
     let currentDepartment = "General Desk";
 
     window.onload = function() {
@@ -130,27 +130,31 @@
         document.getElementById('deptDisplay').innerText = currentDepartment;
     };
 
-    function selectScore(scoreNum, scoreLabel) {
-        selectedScore = scoreNum + " - " + scoreLabel;
-        selectedReason = "";
-        document.getElementById('commentText').value = "";
+    function selectScore(scoreText, scoreNum) {
+        window.currentScoreText = scoreText; // 'Excellent', 'Good', 'Fair', 'Poor' ကို မှတ်သားသည်
+        window.currentReason = "";            // Reason ကို ရှင်းလင်းထားသည်
+        document.getElementById('commentText').value = ""; // Comment Box ကို ရှင်းလင်းထားသည်
 
         if (scoreNum >= 4) {
-            selectedReason = "No issue";
-            submitData();
+            // Excellent သို့မဟုတ် Good ဖြစ်ပါက Reason ကို ဘာမှမထည့်ဘဲ (Blank) တိုက်ရိုက် ပို့မည်
+            window.currentReason = ""; 
+            submitData(); 
         } else {
+            // Fair သို့မဟုတ် Poor ဖြစ်ပါက Reason ရွေးချယ်ရန် Box 2 ကို သွားမည်
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
         }
     }
 
     function selectReason(reason) {
-        selectedReason = reason;
+        window.currentReason = reason;
         if (reason === 'Other') {
+            // Other နှိပ်မှသာ Comment ရိုက်ရန် Box 3 ကို ပြသမည်
             document.getElementById('box2').style.display = 'none';
             document.getElementById('box3').style.display = 'flex';
         } else {
-            submitData();
+            // အခြား အကြောင်းပြချက်များဆိုလျှင် တိုက်ရိုက် ပို့မည်
+            submitData(); 
         }
     }
 
@@ -164,13 +168,11 @@
         }
     }
 
-    // 🔔 Alarm Box လေးကို အပေါ်ကနေ လျှောချပြီး ပြသပေးမည့် Function
     function showAlarmNotification() {
         const alarm = document.getElementById('alarmBox');
         alarm.style.display = 'block';
-        setTimeout(() => { alarm.classList.add('show'); }, 50); // ပြေပြေပြစ်ပြစ်ကျလာစေရန်
+        setTimeout(() => { alarm.classList.add('show'); }, 50);
 
-        // ၂.၅ စက္ကန့်ပြည့်ရင် ပြန်ဝှက်ပြီး App ကို Reset လုပ်မည်
         setTimeout(() => {
             alarm.classList.remove('show');
             setTimeout(() => { alarm.style.display = 'none'; }, 400);
@@ -179,37 +181,37 @@
     }
 
     function submitData() {
-        const url = 'https://sheetdb.io/api/v1/n78wo86ue74qv'; // သင့်ရဲ့ SheetDB API URL ကို ထည့်ပါ
+        const url = 'https://sheetdb.io/api/v1/fi09i1pzqcbx5'; 
         const comment = document.getElementById('commentText').value;
 
         const payload = {
             "data": [{
                 "Date": new Date().toLocaleString(),
                 "Department": currentDepartment, 
-                "Score": selectedScore,
-                "Reason": selectedReason,
-                "Comment": comment
+                "Score": window.currentScoreText, // 'Excellent', 'Good' စသည်ဖြင့် ကွက်တိဝင်မည်
+                "Reason": window.currentReason,   // Excellent/Good ဆိုလျှင် Blank အဖြစ် ဝင်မည်
+                "Comment": comment                // Other နှိပ်ပြီး စာရိုက်မှသာ စာသား ဝင်မည်
             }]
         };
 
-        // ခလုတ်နှိပ်လိုက်တာနဲ့ Alarm Box လေး ချက်ချင်း ကျလာမည်
         showAlarmNotification();
 
-        if(url !== 'YOUR_API_URL') {
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).catch(err => {
-                console.log("Network error, API logged.");
-            });
-        }
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Success:", data))
+        .catch(err => console.log("Fetch Error:", err));
     }
 
     function resetApp() {
         document.getElementById('box2').style.display = 'none';
         document.getElementById('box3').style.display = 'none';
         document.getElementById('box1').style.display = 'flex';
+        window.currentScoreText = "";
+        window.currentReason = "";
     }
 </script>
 
