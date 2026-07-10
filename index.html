@@ -131,16 +131,13 @@
     };
 
     function selectScore(scoreText, scoreNum) {
-        window.currentScoreText = scoreText; // 'Excellent', 'Good', 'Fair', 'Poor' ကို မှတ်သားသည်
-        window.currentReason = "";            // Reason ကို ရှင်းလင်းထားသည်
-        document.getElementById('commentText').value = ""; // Comment Box ကို ရှင်းလင်းထားသည်
+        window.currentScoreText = scoreText; 
+        window.currentReason = "";            // Excellent နှိပ်လျှင် Reason ကော်လံထဲ ဘာမှမထည့်ဘဲ Blank ချန်မည်
+        document.getElementById('commentText').value = ""; 
 
         if (scoreNum >= 4) {
-            // Excellent သို့မဟုတ် Good ဖြစ်ပါက Reason ကို ဘာမှမထည့်ဘဲ (Blank) တိုက်ရိုက် ပို့မည်
-            window.currentReason = ""; 
-            submitData(); 
+            submitData(); // Excellent သို့မဟုတ် Good ဖြစ်ပါက ချက်ချင်းဒေတာပို့မည်
         } else {
-            // Fair သို့မဟုတ် Poor ဖြစ်ပါက Reason ရွေးချယ်ရန် Box 2 ကို သွားမည်
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
         }
@@ -149,11 +146,9 @@
     function selectReason(reason) {
         window.currentReason = reason;
         if (reason === 'Other') {
-            // Other နှိပ်မှသာ Comment ရိုက်ရန် Box 3 ကို ပြသမည်
             document.getElementById('box2').style.display = 'none';
-            document.getElementById('box3').style.display = 'flex';
+            document.getElementById('box3').style.display = 'flex'; 
         } else {
-            // အခြား အကြောင်းပြချက်များဆိုလျှင် တိုက်ရိုက် ပို့မည်
             submitData(); 
         }
     }
@@ -181,6 +176,7 @@
     }
 
     function submitData() {
+        // [Line 166] ဒီနေရာမှာ သင့်ရဲ့ API URL ကို အသေထည့်သွင်းပေးထားပြီးသားဖြစ်ပါတယ်ဗျာ။
         const url = 'https://sheetdb.io/api/v1/fi09i1pzqcbx5'; 
         const comment = document.getElementById('commentText').value;
 
@@ -188,9 +184,9 @@
             "data": [{
                 "Date": new Date().toLocaleString(),
                 "Department": currentDepartment, 
-                "Score": window.currentScoreText, // 'Excellent', 'Good' စသည်ဖြင့် ကွက်တိဝင်မည်
-                "Reason": window.currentReason,   // Excellent/Good ဆိုလျှင် Blank အဖြစ် ဝင်မည်
-                "Comment": comment                // Other နှိပ်ပြီး စာရိုက်မှသာ စာသား ဝင်မည်
+                "Score": window.currentScoreText, // Excellent လို့ ကွက်တိဝင်စေရမည်
+                "Reason": window.currentReason,   // Excellent ဆိုလျှင် Blank (ဘာမှမရှိ) ဖြစ်စေရမည်
+                "Comment": comment                
             }]
         };
 
