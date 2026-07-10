@@ -55,7 +55,7 @@
         .back-btn:active { background: #334155; }
         .corner-back { position: absolute; top: 25px; left: 25px; background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; }
         
-        /* 🔔 Custom Alarm Box */
+        /* Custom Alarm Box */
         .custom-alarm {
             display: none;
             position: fixed;
@@ -132,11 +132,11 @@
 
     function selectScore(scoreText, scoreNum) {
         window.currentScoreText = scoreText; 
-        window.currentReason = "";            // Excellent နှိပ်လျှင် Reason ကော်လံထဲ ဘာမှမထည့်ဘဲ Blank ချန်မည်
+        window.currentReason = "";            // Excellent/Good အတွက် Reason ကို ကွက်လပ် (Blank) ထားမည်
         document.getElementById('commentText').value = ""; 
 
         if (scoreNum >= 4) {
-            submitData(); // Excellent သို့မဟုတ် Good ဖြစ်ပါက ချက်ချင်းဒေတာပို့မည်
+            submitData(); // Excellent သို့မဟုတ် Good ဖြစ်ပါက တိုက်ရိုက် ပို့မည်
         } else {
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
@@ -149,7 +149,7 @@
             document.getElementById('box2').style.display = 'none';
             document.getElementById('box3').style.display = 'flex'; 
         } else {
-            submitData(); 
+            submitData(); // အခြားအကြောင်းရင်းများဆိုလျှင် ချက်ချင်း ပို့မည်
         }
     }
 
@@ -176,16 +176,17 @@
     }
 
     function submitData() {
-        // [Line 166] ဒီနေရာမှာ သင့်ရဲ့ API URL ကို အသေထည့်သွင်းပေးထားပြီးသားဖြစ်ပါတယ်ဗျာ။
+        // Line 166: သင့်ရဲ့ မူရင်း API Link ကို ပြန်လည်ပြင်ဆင်ပေးထားပါတယ်ဗျာ
         const url = 'https://sheetdb.io/api/v1/fi09i1pzqcbx5'; 
         const comment = document.getElementById('commentText').value;
 
+        // SheetDB API က Sheet column ခေါင်းစဉ်အတိုင်း ကွက်တိသိနိုင်စေရန် ပြုလုပ်ထားပါသည်
         const payload = {
             "data": [{
                 "Date": new Date().toLocaleString(),
                 "Department": currentDepartment, 
-                "Score": window.currentScoreText, // Excellent လို့ ကွက်တိဝင်စေရမည်
-                "Reason": window.currentReason,   // Excellent ဆိုလျှင် Blank (ဘာမှမရှိ) ဖြစ်စေရမည်
+                "Score": window.currentScoreText, 
+                "Reason": window.currentReason,   
                 "Comment": comment                
             }]
         };
