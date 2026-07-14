@@ -12,8 +12,8 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             text-align: center; 
+            /* 🎨 အစောဆုံးက သုံးထားခဲ့တဲ့ သန့်ရှင်းလတ်ဆတ်သော အပြာနုရောင် Soft Gradient နောက်ခံသို့ ပြန်ပြောင်းထားခြင်း */
             background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
-            background-attachment: fixed;
             margin: 0; 
             padding: 30px 20px;
             user-select: none;
@@ -27,61 +27,58 @@
 
         .container { max-width: 950px; width: 100%; margin: 0 auto; position: relative; }
         
-        /* Department Banner Design */
+        /* Premium Department Banner Design */
         .header-container {
-            background: #f0f7ff; 
-            padding: 14px 45px;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
-            border: 2px solid #e2e8f0;
-            border-bottom: 4px solid #d4af37; 
-            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 12px 40px;
+            border-radius: 50px; 
+            box-shadow: 0 10px 30px rgba(15, 44, 89, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
             display: inline-block;
             min-width: 320px;
         }
         
         .dept-banner { 
             color: #0f2c59; 
-            font-size: 28px; 
+            font-size: 26px; 
             font-weight: 800; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 2px; 
             text-transform: uppercase; 
         }
         .dept-subtitle { 
-            color: #475569; 
-            font-size: 15px; 
-            font-weight: 700; 
+            color: #1e293b; 
+            font-size: 14px; 
+            font-weight: 800; 
             margin-bottom: 25px; 
-            letter-spacing: 0.8px; 
+            letter-spacing: 1px; 
             text-transform: uppercase;
         }
         
-        /* Premium Glassmorphism Cards */
+        /* High-Quality Sharp White Cards */
         .feedback-card { 
-            background: rgba(255, 255, 255, 0.96); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 50px 40px; 
-            border-radius: 28px; 
-            box-shadow: 0 20px 40px rgba(15, 44, 89, 0.1); 
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: #ffffff; 
+            padding: 55px 45px; 
+            border-radius: 32px; 
+            box-shadow: 0 30px 60px rgba(15, 44, 89, 0.1); 
+            border: 1px solid #e2e8f0;
             min-height: 400px; 
             display: none; 
             flex-direction: column; 
             justify-content: center; 
             align-items: center;
             position: relative; 
-            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             box-sizing: border-box; 
         }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-        /* Modern Box Headings */
-        h1 { color: #0f2c59; font-size: 36px; margin-bottom: 8px; font-weight: 800; margin-top: 0; }
-        .box-subtitle { color: #475569; font-size: 18px; margin-bottom: 45px; font-weight: 600; }
-        h3 { color: #0f2c59; margin-bottom: 30px; font-size: 24px; line-height: 1.4; font-weight: 800; margin-top: 0; }
+        /* Modern Typography */
+        h1 { color: #0f2c59; font-size: 38px; margin-bottom: 8px; font-weight: 900; margin-top: 0; }
+        .box-subtitle { color: #475569; font-size: 19px; margin-bottom: 45px; font-weight: 600; }
+        h3 { color: #0f2c59; margin-bottom: 30px; font-size: 25px; line-height: 1.4; font-weight: 800; margin-top: 0; }
         
-        /* Smileys Layout */
+        /* Modern Emoji Box Layout */
         .emoji-row { 
             display: flex; 
             justify-content: space-between; 
@@ -95,33 +92,33 @@
             flex-direction: column; 
             align-items: center; 
             background: #ffffff; 
-            padding: 22px 5px; 
-            border-radius: 20px; 
+            padding: 24px 5px; 
+            border-radius: 24px; 
             border: 2px solid #e2e8f0; 
             flex: 1; 
             min-width: 0; 
             cursor: pointer; 
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .emoji-box:active { transform: scale(0.92); background-color: #f1f5f9; }
-        .emoji-box:hover { border-color: #3b82f6; box-shadow: 0 8px 16px rgba(59, 130, 246, 0.08); }
-        .emoji { font-size: 58px; margin-bottom: 12px; transition: transform 0.2s; } 
-        .emoji-box:hover .emoji { transform: scale(1.1); }
+        .emoji-box:hover { border-color: #0f2c59; box-shadow: 0 10px 20px rgba(15, 44, 89, 0.06); }
+        .emoji { font-size: 60px; margin-bottom: 12px; transition: transform 0.2s; } 
+        .emoji-box:hover .emoji { transform: scale(1.12); }
         .label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        /* Buttons Grid */
+        /* Modern Action Buttons Grid */
         .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; width: 100%; }
         .reason-btn { background: #ffffff; border: 2px solid #cbd5e1; padding: 22px 15px; border-radius: 18px; font-size: 16px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .reason-btn:active { background: #f1f5f9; transform: scale(0.97); }
         .reason-btn:hover { border-color: #0f2c59; color: #0f2c59; }
         
-        /* Comment & Submit */
+        /* Custom Input Styling */
         textarea { width: 100%; height: 140px; padding: 18px; border-radius: 16px; border: 2px solid #cbd5e1; font-size: 18px; box-sizing: border-box; resize: none; margin-bottom: 20px; outline: none; transition: 0.2s; }
         textarea:focus { border-color: #0f2c59; box-shadow: 0 0 0 4px rgba(15, 44, 89, 0.1); }
         .btn-row { display: flex; justify-content: center; gap: 15px; }
         
-        /* Action Buttons */
+        /* Buttons design */
         .submit-btn { background: #0f2c59; color: white; border: none; padding: 18px 65px; font-size: 20px; font-weight: bold; border-radius: 14px; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(15, 44, 89, 0.2); }
         .submit-btn:active { background: #081833; transform: scale(0.97); }
         .back-btn { background: #64748b; color: white; border: none; padding: 18px 45px; font-size: 18px; font-weight: bold; border-radius: 14px; cursor: pointer; transition: 0.2s; }
@@ -131,7 +128,7 @@
         .corner-back { position: absolute; top: 22px; right: 25px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 8px 20px; font-size: 14px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: 0.2s; }
         .corner-back:active { background: #e2e8f0; }
         
-        /* 💚 CUSTOM CAPSULE NOTI BOX (Excellent, Good, Average အတွက်သာ) */
+        /* 💚 Success Toast */
         .toast-notification {
             position: fixed;
             top: -100px;
@@ -141,22 +138,22 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 16px 45px;
+            padding: 18px 50px;
             border-radius: 50px; 
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 700;
             color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             z-index: 9999;
-            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: top 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             white-space: nowrap;
-            background-color: #2ecc71; /* Image အတိုင်း အစိမ်းရောင်စစ်စစ် */
+            background-color: #2ecc71; 
         }
         .toast-notification.show {
             top: 40px; 
         }
 
-        /* 🔴 Fair, Poor အတွက် အရင်အတိုင်း ကျန်ရစ်မည့် ကာတွန်းပုံစံ တောင်းပန်လွှာ Box စတိုင် */
+        /* 🔴 Fair, Poor အတွက် တောင်းပန်လွှာ Box စတိုင် */
         .red-noti-card {
             background: #fff5f5 !important;
             border: 3px solid #f87171 !important;
@@ -199,7 +196,8 @@
             <div class="emoji-box" onclick="selectScore('Good', 4)"><span class="emoji">😊</span><span class="label" style="color:#059669">GOOD</span></div>
             <div class="emoji-box" onclick="selectScore('Average', 3)"><span class="emoji">😐</span><span class="label" style="color:#d97706">AVERAGE</span></div>
             <div class="emoji-box" onclick="selectScore('Fair', 2)"><span class="emoji">🙁</span><span class="label" style="color:#ea580c">FAIR</span></div>
-            <div class="emoji-box" onclick="selectScore('Poor', 1)"><span class="emoji">😞</span><span class="label" style="color:#dc2626">POOR</span></div>
+            <!-- 😡 Emoji နေရာလေးပါဗျာ -->
+            <div class="emoji-box" onclick="selectScore('Poor', 1)"><span class="emoji">😡</span><span class="label" style="color:#dc2626">POOR</span></div>
         </div>
     </div>
 
@@ -226,7 +224,7 @@
         </div>
     </div>
 
-    <!-- 🔴 Fair, Poor အတွက် အရင်အတိုင်းကျန်ရစ်မည့် တောင်းပန်လွှာမျက်နှာပြင် (Box 5) -->
+    <!-- 🔴 Fair, Poor အတွက် တောင်းပန်လွှာမျက်နှာပြင် (Box 5) -->
     <div id="box5" class="feedback-card red-noti-card">
         <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/sorry_avatar.png" alt="Sorry" class="result-img" onerror="this.style.display='none'">
         <div class="red-text">
@@ -258,10 +256,8 @@
         document.getElementById('commentText').value = ""; 
 
         if (scoreNum >= 3) {
-            // Excellent, Good, Average ဖြစ်လျှင် ဒေတာတန်းပို့ပြီး Noti Box အစိမ်းလေး ပြမည်
             submitData(); 
         } else {
-            // Fair, Poor ဖြစ်လျှင် အရင်အတိုင်း နောက်တစ်ဆင့်များကို သွားမည်
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
         }
@@ -289,7 +285,6 @@
 
     function showResultScreen() {
         if (window.currentScoreNum >= 3) {
-            // 🟢 Excellent, Good, Average အတွက် Slide-down Capsule Noti ပြသခြင်း
             const toast = document.getElementById('successToast');
             toast.classList.add('show');
             setTimeout(() => {
@@ -297,7 +292,6 @@
                 resetApp();
             }, 3000);
         } else {
-            // 🔴 Fair, Poor အတွက် အရင်အတိုင်း ကာတွန်းပုံနှင့် တောင်းပန်လွှာ Box ကြီးပြသခြင်း
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'none';
             document.getElementById('box3').style.display = 'none';
