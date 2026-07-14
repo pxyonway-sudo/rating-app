@@ -12,7 +12,7 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             text-align: center; 
-            /* 🎨 အစောဆုံးက သုံးထားခဲ့တဲ့ သန့်ရှင်းလတ်ဆတ်သော အပြာနုရောင် Soft Gradient နောက်ခံသို့ ပြန်ပြောင်းထားခြင်း */
+            /* 🎨 သန့်ရှင်းလတ်ဆတ်သော အပြာနုရောင် Soft Gradient နောက်ခံ */
             background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
             margin: 0; 
             padding: 30px 20px;
@@ -27,31 +27,33 @@
 
         .container { max-width: 950px; width: 100%; margin: 0 auto; position: relative; }
         
-        /* Premium Department Banner Design */
+        /* Premium Department Banner Design WITH GOLD HIGHLIGHT */
         .header-container {
             background: rgba(255, 255, 255, 0.95); 
-            padding: 12px 40px;
-            border-radius: 50px; 
-            box-shadow: 0 10px 30px rgba(15, 44, 89, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            margin-bottom: 5px;
+            padding: 14px 45px;
+            border-radius: 16px; 
+            box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
+            border: 2px solid #e2e8f0;
+            /* ✨ အောက်ခြေ ရွှေဝါရောင်လိုင်းလေး ပြန်လည်ထည့်သွင်းပေးထားသော နေရာ */
+            border-bottom: 4px solid #d4af37; 
+            margin-bottom: 8px;
             display: inline-block;
             min-width: 320px;
         }
         
         .dept-banner { 
             color: #0f2c59; 
-            font-size: 26px; 
+            font-size: 28px; 
             font-weight: 800; 
-            letter-spacing: 2px; 
+            letter-spacing: 1.5px; 
             text-transform: uppercase; 
         }
         .dept-subtitle { 
             color: #1e293b; 
-            font-size: 14px; 
-            font-weight: 800; 
+            font-size: 15px; 
+            font-weight: 700; 
             margin-bottom: 25px; 
-            letter-spacing: 1px; 
+            letter-spacing: 0.8px; 
             text-transform: uppercase;
         }
         
@@ -175,19 +177,16 @@
 </head>
 <body>
 
-<!-- Green Capsule Toast Notification (Excellent, Good, Average အတွက်) -->
 <div id="successToast" class="toast-notification">
     💚 Thank you for your support!
 </div>
 
 <div class="container">
-    <!-- Department Banner -->
     <div class="header-container">
         <div id="deptDisplay" class="dept-banner">CUSTOMER SERVICE</div>
     </div>
     <div class="dept-subtitle">MANDALAR HOSPITAL — We are here to serve you better.</div>
 
-    <!-- Rating Screen (Box 1) -->
     <div id="box1" class="feedback-card" style="display: flex;">
         <h1>How was your service today?</h1>
         <div class="box-subtitle">Your feedback helps us improve.</div>
@@ -196,12 +195,10 @@
             <div class="emoji-box" onclick="selectScore('Good', 4)"><span class="emoji">😊</span><span class="label" style="color:#059669">GOOD</span></div>
             <div class="emoji-box" onclick="selectScore('Average', 3)"><span class="emoji">😐</span><span class="label" style="color:#d97706">AVERAGE</span></div>
             <div class="emoji-box" onclick="selectScore('Fair', 2)"><span class="emoji">🙁</span><span class="label" style="color:#ea580c">FAIR</span></div>
-            <!-- 😡 Emoji နေရာလေးပါဗျာ -->
             <div class="emoji-box" onclick="selectScore('Poor', 1)"><span class="emoji">😡</span><span class="label" style="color:#dc2626">POOR</span></div>
         </div>
     </div>
 
-    <!-- Improvement Selection (Box 2) -->
     <div id="box2" class="feedback-card">
         <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
         <h3>What can we improve?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
@@ -213,7 +210,6 @@
         </div>
     </div>
 
-    <!-- Feedback Comments (Box 3) -->
     <div id="box3" class="feedback-card">
         <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
         <textarea id="commentText" placeholder="Type your comments here..."></textarea>
@@ -224,7 +220,6 @@
         </div>
     </div>
 
-    <!-- 🔴 Fair, Poor အတွက် တောင်းပန်လွှာမျက်နှာပြင် (Box 5) -->
     <div id="box5" class="feedback-card red-noti-card">
         <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/sorry_avatar.png" alt="Sorry" class="result-img" onerror="this.style.display='none'">
         <div class="red-text">
