@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,8 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             text-align: center; 
-            
-            /* Logo နှင့် အလိုက်ဖက်ဆုံးဖြစ်မယ့် Soft Blue-Grey Gradient Background */
             background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
             background-attachment: fixed;
-            
             margin: 0; 
             padding: 30px 20px;
             user-select: none;
@@ -37,14 +34,14 @@
             border-radius: 16px;
             box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
             border: 2px solid #e2e8f0;
-            border-bottom: 4px solid #d4af37; /* Mandalar Gold Accent Line */
+            border-bottom: 4px solid #d4af37; 
             margin-bottom: 8px;
             display: inline-block;
             min-width: 320px;
         }
         
         .dept-banner { 
-            color: #0f2c59; /* Deep Navy Blue */
+            color: #0f2c59; 
             font-size: 28px; 
             font-weight: 800; 
             letter-spacing: 1.5px; 
@@ -64,46 +61,25 @@
             background: rgba(255, 255, 255, 0.96); 
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            padding: 85px 40px 45px 40px; /* 👇 Logo နှင့် မငြိစေရန် top padding ကို 85px သို့ တိုးမြှင့်ထားသည် */
+            padding: 50px 40px; 
             border-radius: 28px; 
             box-shadow: 0 20px 40px rgba(15, 44, 89, 0.1); 
             border: 1px solid rgba(255, 255, 255, 0.6);
-            min-height: 460px; 
+            min-height: 400px; 
             display: none; 
             flex-direction: column; 
             justify-content: center; 
+            align-items: center;
             position: relative; 
             animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             box-sizing: border-box; 
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
-        
-        /* 👇 ဘောင်ခတ်ခြင်းမရှိဘဲ သဘာဝကျကျ ကြည်လင်ပြတ်သားစွာ ပြသပေးမယ့် Corner Logo Style */
-        .card-inner-logo {
-            position: absolute;
-            top: 20px;
-            left: 25px;
-            width: 110px; /* အရွယ်အစားကို အချိုးကျကျ ကြီးပြီး ကြည်လင်အောင် ထားရှိသည် */
-            height: auto;
-            max-height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Original PNG Quality အတိုင်း ဝါးမသွားဘဲ HD အတိုင်း ပေါ်နေစေရန် */
-        .logo-img {
-            height: 100%; 
-            width: 100%;
-            object-fit: contain;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
 
         /* Modern Box Headings */
-        h1 { color: #0f2c59; font-size: 35px; margin-bottom: 8px; font-weight: 800; margin-top: 10px; }
+        h1 { color: #0f2c59; font-size: 36px; margin-bottom: 8px; font-weight: 800; margin-top: 0; }
         .box-subtitle { color: #475569; font-size: 18px; margin-bottom: 45px; font-weight: 600; }
-        h3 { color: #0f2c59; margin-bottom: 30px; font-size: 24px; line-height: 1.4; font-weight: 800; margin-top: 10px; }
+        h3 { color: #0f2c59; margin-bottom: 30px; font-size: 24px; line-height: 1.4; font-weight: 800; margin-top: 0; }
         
         /* Smileys Layout */
         .emoji-row { 
@@ -112,6 +88,7 @@
             gap: 15px; 
             margin-bottom: 10px; 
             overflow: hidden; 
+            width: 100%;
         }
         .emoji-box { 
             display: flex; 
@@ -134,7 +111,7 @@
         .label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         
         /* Buttons Grid */
-        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; }
+        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; width: 100%; }
         .reason-btn { background: #ffffff; border: 2px solid #cbd5e1; padding: 22px 15px; border-radius: 18px; font-size: 16px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .reason-btn:active { background: #f1f5f9; transform: scale(0.97); }
         .reason-btn:hover { border-color: #0f2c59; color: #0f2c59; }
@@ -154,41 +131,67 @@
         .corner-back { position: absolute; top: 22px; right: 25px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 8px 20px; font-size: 14px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: 0.2s; }
         .corner-back:active { background: #e2e8f0; }
         
-        /* Custom Alarm Box (Green) */
-        .custom-alarm {
-            display: none;
+        /* 💚 CUSTOM CAPSULE NOTI BOX (Excellent, Good, Average အတွက်သာ) */
+        .toast-notification {
             position: fixed;
             top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 45px;
+            border-radius: 50px; 
+            font-size: 24px;
+            font-weight: 700;
             color: white;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 21px;
-            font-weight: bold;
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 9999;
             transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
+            background-color: #2ecc71; /* Image အတိုင်း အစိမ်းရောင်စစ်စစ် */
         }
-        .custom-alarm.show { top: 30px; }
+        .toast-notification.show {
+            top: 40px; 
+        }
+
+        /* 🔴 Fair, Poor အတွက် အရင်အတိုင်း ကျန်ရစ်မည့် ကာတွန်းပုံစံ တောင်းပန်လွှာ Box စတိုင် */
+        .red-noti-card {
+            background: #fff5f5 !important;
+            border: 3px solid #f87171 !important;
+            box-shadow: 0 20px 45px rgba(153, 27, 27, 0.15) !important;
+        }
+        .red-text {
+            color: #7f1d1d;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.8;
+        }
+        .result-img {
+            width: 160px;
+            height: auto;
+            margin-bottom: 25px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
 
-<div id="alarmBox" class="custom-alarm">💚 Thank you for your support!</div>
+<!-- Green Capsule Toast Notification (Excellent, Good, Average အတွက်) -->
+<div id="successToast" class="toast-notification">
+    💚 Thank you for your support!
+</div>
 
 <div class="container">
+    <!-- Department Banner -->
     <div class="header-container">
         <div id="deptDisplay" class="dept-banner">CUSTOMER SERVICE</div>
     </div>
     <div class="dept-subtitle">MANDALAR HOSPITAL — We are here to serve you better.</div>
 
+    <!-- Rating Screen (Box 1) -->
     <div id="box1" class="feedback-card" style="display: flex;">
-        <div class="card-inner-logo">
-            <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/MH_LOGO.png" alt="Mandalar Hospital Logo" class="logo-img" onerror="this.parentNode.style.display='none'">
-        </div>
-
         <h1>How was your service today?</h1>
         <div class="box-subtitle">Your feedback helps us improve.</div>
         <div class="emoji-row">
@@ -200,12 +203,9 @@
         </div>
     </div>
 
+    <!-- Improvement Selection (Box 2) -->
     <div id="box2" class="feedback-card">
-        <div class="card-inner-logo">
-            <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/MH_LOGO.png" alt="Mandalar Hospital Logo" class="logo-img" onerror="this.parentNode.style.display='none'">
-        </div>
         <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
-
         <h3>What can we improve?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
         <div class="reason-grid">
             <button class="reason-btn" onclick="selectReason('Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:14px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
@@ -215,11 +215,8 @@
         </div>
     </div>
 
+    <!-- Feedback Comments (Box 3) -->
     <div id="box3" class="feedback-card">
-        <div class="card-inner-logo">
-            <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/MH_LOGO.png" alt="Mandalar Hospital Logo" class="logo-img" onerror="this.parentNode.style.display='none'">
-        </div>
-
         <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
         <textarea id="commentText" placeholder="Type your comments here..."></textarea>
         <br>
@@ -228,10 +225,20 @@
             <button class="submit-btn" onclick="submitData()">SUBMIT</button>
         </div>
     </div>
+
+    <!-- 🔴 Fair, Poor အတွက် အရင်အတိုင်းကျန်ရစ်မည့် တောင်းပန်လွှာမျက်နှာပြင် (Box 5) -->
+    <div id="box5" class="feedback-card red-noti-card">
+        <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/sorry_avatar.png" alt="Sorry" class="result-img" onerror="this.style.display='none'">
+        <div class="red-text">
+            လူကြီးမင်း၏ အဆင်မပြေမှုအတွက်<br>တောင်းပန်ပါတယ်ခင်ဗျာ။<br>ကြိုးစားပါဦးမယ်ခင်ဗျာ။
+        </div>
+    </div>
+
 </div>
 
 <script>
     window.currentScoreText = "";
+    window.currentScoreNum = 0;
     window.currentReason = "";
     let currentDepartment = "Customer Service";
 
@@ -246,12 +253,15 @@
 
     function selectScore(scoreText, scoreNum) {
         window.currentScoreText = scoreText; 
+        window.currentScoreNum = scoreNum;
         window.currentReason = ""; 
         document.getElementById('commentText').value = ""; 
 
         if (scoreNum >= 3) {
+            // Excellent, Good, Average ဖြစ်လျှင် ဒေတာတန်းပို့ပြီး Noti Box အစိမ်းလေး ပြမည်
             submitData(); 
         } else {
+            // Fair, Poor ဖြစ်လျှင် အရင်အတိုင်း နောက်တစ်ဆင့်များကို သွားမည်
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'flex';
         }
@@ -277,16 +287,25 @@
         }
     }
 
-    function showAlarmNotification() {
-        const alarm = document.getElementById('alarmBox');
-        alarm.style.display = 'block';
-        setTimeout(() => { alarm.classList.add('show'); }, 50);
-
-        setTimeout(() => {
-            alarm.classList.remove('show');
-            setTimeout(() => { alarm.style.display = 'none'; }, 400);
-            resetApp();
-        }, 2500);
+    function showResultScreen() {
+        if (window.currentScoreNum >= 3) {
+            // 🟢 Excellent, Good, Average အတွက် Slide-down Capsule Noti ပြသခြင်း
+            const toast = document.getElementById('successToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                resetApp();
+            }, 3000);
+        } else {
+            // 🔴 Fair, Poor အတွက် အရင်အတိုင်း ကာတွန်းပုံနှင့် တောင်းပန်လွှာ Box ကြီးပြသခြင်း
+            document.getElementById('box1').style.display = 'none';
+            document.getElementById('box2').style.display = 'none';
+            document.getElementById('box3').style.display = 'none';
+            document.getElementById('box5').style.display = 'flex';
+            setTimeout(() => {
+                resetApp();
+            }, 3000);
+        }
     }
 
     function submitData() {
@@ -306,7 +325,7 @@
             }]
         };
 
-        showAlarmNotification();
+        showResultScreen();
 
         fetch(url, {
             method: 'POST',
@@ -319,10 +338,12 @@
     }
 
     function resetApp() {
+        document.getElementById('box5').style.display = 'none';
         document.getElementById('box2').style.display = 'none';
         document.getElementById('box3').style.display = 'none';
         document.getElementById('box1').style.display = 'flex';
         window.currentScoreText = "";
+        window.currentScoreNum = 0;
         window.currentReason = "";
     }
 </script>
