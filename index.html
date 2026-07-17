@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mandalar Hospital Feedback Kiosk</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
     
     <style>
         body { 
@@ -15,7 +12,21 @@
             background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
             margin: 0; padding: 30px 20px; user-select: none; min-height: 100vh;
             box-sizing: border-box; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            justify-content: center; align-items: center; position: relative;
+        }
+
+        /* Logo Positioning */
+        .logo-container {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            z-index: 9999;
+            padding: 10px; /* အစွန်းနဲ့ နည်းနည်းလေးကွာချင်ရင် ဒီ padding ကို ထားပါ၊ မကွာချင်ရင် 0px လုပ်ပါ */
+        }
+        .logo-container img {
+            width: 400px; /* လိုအပ်လျှင် ဒီနေရာမှာ Size ချိန်ပါ */
+            height: auto;
+            display: block;
         }
 
         .container { max-width: 950px; width: 100%; margin: 0 auto; position: relative; }
@@ -89,6 +100,11 @@
 </head>
 <body>
 
+<!-- Logo ထည့်ရန်နေရာ -->
+<div class="logo-container">
+    <img src="logo.png" alt="Mandalar Hospital Logo">
+</div>
+
 <div id="successToast" class="toast-notification">💚 Thank you for your support!</div>
 
 <div class="container">
@@ -131,12 +147,10 @@
     </div>
 
     <div id="box5" class="feedback-card red-noti-card">
-        <img src="C:/Users/IT Manager/Desktop/PN/New folder/PN/sorry_avatar.png" alt="Sorry" class="result-img" onerror="this.style.display='none'">
         <div class="red-text">
             လူကြီးမင်း၏ အဆင်မပြေမှုအတွက်<br>တောင်းပန်ပါတယ်ခင်ဗျာ။<br>ကြိုးစားပါဦးမယ်ခင်ဗျာ။
         </div>
     </div>
-
 </div>
 
 <script>
@@ -207,9 +221,7 @@
         }
     }
 
-    // Google Apps Script အတွက် ပြင်ဆင်ထားသည်
     function submitData() {
-        // ⬇️ ဤနေရာတွင် Phyo ရဲ့ Google Apps Script URL ကို ထည့်ပါ
         const url = 'https://script.google.com/macros/s/AKfycbyZJ_NOiey5SfzRf93MMMmI4bJGzx-LBdtwhoGnTpIVa9cVdA7_rro4bIBciQNN_QL_/exec'; 
         
         const comment = document.getElementById('commentText').value;
