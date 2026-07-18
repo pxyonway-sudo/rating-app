@@ -257,12 +257,15 @@
         window.currentScoreNum = 0;
         window.currentReason = "";
 
-        // အောက်ဆုံးမှာ ဒီ code လေးကို ထပ်ပေါင်းလိုက်ပါ
+    
+    }
+</script>
+<script>
+    // အောက်ဆုံးမှာ ဒီ code လေးကို ထပ်ပေါင်းလိုက်ပါ
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
             .then(() => console.log('Service Worker Registered'));
-    }
-</script>
 
+        </script>       
 </body>
 </html>
