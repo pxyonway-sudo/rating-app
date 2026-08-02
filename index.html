@@ -5,139 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mandalar Hospital Feedback Kiosk</title>
     
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f2c59">
+    
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             text-align: center; 
-            background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
-            margin: 0; padding: 30px 20px; user-select: none; min-height: 100vh;
+            background-image: url('background.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: contain;
+            background-color: #f8fafc;
+            margin: 0; padding: 20px; user-select: none; min-height: 100vh;
             box-sizing: border-box; display: flex; flex-direction: column;
             justify-content: center; align-items: center; position: relative;
         }
 
-        /* Logo Positioning */
-        .logo-container {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            z-index: 9999;
-            padding: 0px; /* အစွန်းနဲ့ နည်းနည်းလေးကွာချင်ရင် ဒီ padding ကို ထားပါ၊ မကွာချင်ရင် 0px လုပ်ပါ */
-        }
-        .logo-container img {
-            width: 300px; /* လိုအပ်လျှင် ဒီနေရာမှာ Size ချိန်ပါ */
-            height: auto;
-            display: block;
-        }
-
-        .container { max-width: 950px; width: 100%; margin: 0 auto; position: relative; }
+        .container { max-width: 900px; width: 100%; margin: 0 auto; position: relative; }
         
         .header-container {
-            background: rgba(255, 255, 255, 0.95); padding: 14px 45px;
-            border-radius: 16px; box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
+            background: rgba(255, 255, 255, 0.95); padding: 12px 35px;
+            border-radius: 14px; box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
             border: 2px solid #e2e8f0; border-bottom: 4px solid #d4af37; 
-            margin-bottom: 8px; display: inline-block; min-width: 320px;
+            margin-bottom: 12px; display: inline-block; min-width: 280px;
         }
         
-        .dept-banner { color: #0f2c59; font-size: 28px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
-        .dept-subtitle { color: #1e293b; font-size: 15px; font-weight: 700; margin-bottom: 25px; letter-spacing: 0.8px; text-transform: uppercase; }
+        .dept-banner { color: #0f2c59; font-size: 26px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
         
         .feedback-card { 
-            background: #ffffff; padding: 55px 45px; border-radius: 32px; 
-            box-shadow: 0 30px 60px rgba(15, 44, 89, 0.1); border: 1px solid #e2e8f0;
-            min-height: 400px; display: none; flex-direction: column; 
+            background: #ffffff; padding: 40px 35px; border-radius: 28px; 
+            box-shadow: 0 25px 50px rgba(15, 44, 89, 0.1); border: 1px solid #e2e8f0;
+            width: 100%; min-height: 380px; display: none; flex-direction: column; 
             justify-content: center; align-items: center; position: relative; 
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-sizing: border-box; 
+            box-sizing: border-box; 
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-        h1 { color: #0f2c59; font-size: 38px; margin-bottom: 8px; font-weight: 900; margin-top: 0; }
-        .box-subtitle { color: #475569; font-size: 19px; margin-bottom: 45px; font-weight: 600; }
-        h3 { color: #0f2c59; margin-bottom: 30px; font-size: 25px; line-height: 1.4; font-weight: 800; margin-top: 0; }
+        h4 { color: #0f2c59; font-size: 24px; margin-bottom: 8px; font-weight: 800; margin-top: 0; }
+        .box-subtitle { color: #475569; font-size: 17px; margin-bottom: 35px; font-weight: 600; }
+        h3 { color: #0f2c59; margin-bottom: 25px; font-size: 22px; line-height: 1.4; font-weight: 800; margin-top: 0; }
         
-        .emoji-row { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 10px; overflow: hidden; width: 100%; }
+        .emoji-row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; overflow: hidden; width: 100%; }
+        
         .emoji-box { 
-            display: flex; flex-direction: column; align-items: center; background: #ffffff; 
-            padding: 24px 5px; border-radius: 24px; border: 2px solid #e2e8f0; flex: 1; min-width: 0; 
+            display: flex; flex-direction: column; align-items: center; background: #e1ebff; 
+            padding: 20px 5px; border-radius: 20px; border: 2px solid #cbd5e1; flex: 1; min-width: 0; 
             cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
-        .emoji-box:active { transform: scale(0.92); background-color: #f1f5f9; }
+        .emoji-box:active { transform: scale(0.92); background-color: #cbd5e1; }
         .emoji-box:hover { border-color: #0f2c59; box-shadow: 0 10px 20px rgba(15, 44, 89, 0.06); }
-        .emoji { font-size: 60px; margin-bottom: 12px; transition: transform 0.2s; } 
+        .emoji { font-size: 50px; margin-bottom: 10px; transition: transform 0.2s; } 
         .emoji-box:hover .emoji { transform: scale(1.12); }
-        .label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; width: 100%; }
-        .reason-btn { background: #ffffff; border: 2px solid #cbd5e1; padding: 22px 15px; border-radius: 18px; font-size: 16px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; width: 100%; }
+        .reason-btn { background: #ffffff; border: 2px solid #cbd5e1; padding: 18px 12px; border-radius: 16px; font-size: 15px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .reason-btn:active { background: #f1f5f9; transform: scale(0.97); }
         .reason-btn:hover { border-color: #0f2c59; color: #0f2c59; }
         
-        textarea { width: 100%; height: 140px; padding: 18px; border-radius: 16px; border: 2px solid #cbd5e1; font-size: 18px; box-sizing: border-box; resize: none; margin-bottom: 20px; outline: none; transition: 0.2s; }
+        textarea { width: 100%; height: 120px; padding: 15px; border-radius: 14px; border: 2px solid #cbd5e1; font-size: 16px; box-sizing: border-box; resize: none; margin-bottom: 15px; outline: none; transition: 0.2s; }
         textarea:focus { border-color: #0f2c59; box-shadow: 0 0 0 4px rgba(15, 44, 89, 0.1); }
-        .btn-row { display: flex; justify-content: center; gap: 15px; }
+        .btn-row { display: flex; justify-content: center; gap: 12px; }
         
-        .submit-btn { background: #0f2c59; color: white; border: none; padding: 18px 65px; font-size: 20px; font-weight: bold; border-radius: 14px; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(15, 44, 89, 0.2); }
+        .submit-btn { background: #0f2c59; color: white; border: none; padding: 15px 50px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(15, 44, 89, 0.2); }
         .submit-btn:active { background: #081833; transform: scale(0.97); }
-        .back-btn { background: #64748b; color: white; border: none; padding: 18px 45px; font-size: 18px; font-weight: bold; border-radius: 14px; cursor: pointer; transition: 0.2s; }
+        .back-btn { background: #64748b; color: white; border: none; padding: 15px 35px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
         .back-btn:active { background: #475569; transform: scale(0.97); }
         
-        .corner-back { position: absolute; top: 22px; right: 25px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 8px 20px; font-size: 14px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: 0.2s; }
+        .corner-back { position: absolute; top: 18px; right: 20px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 6px 16px; font-size: 13px; font-weight: bold; border-radius: 25px; cursor: pointer; transition: 0.2s; }
         .corner-back:active { background: #e2e8f0; }
         
         .toast-notification {
             position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            padding: 18px 50px; border-radius: 50px; font-size: 25px; font-weight: 700;
-            color: white; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); z-index: 9999;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 12px 25px; border-radius: 40px; font-size: 17px; font-weight: 700;
+            color: white; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); z-index: 9999;
             transition: top 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             white-space: nowrap; background-color: #2ecc71; 
         }
-        .toast-notification.show { top: 40px; }
+        .toast-notification.show { top: 25px; }
 
-        .red-noti-card { background: #fff5f5 !important; border: 3px solid #f87171 !important; box-shadow: 0 20px 45px rgba(153, 27, 27, 0.15) !important; }
-        .red-text { color: #7f1d1d; font-size: 24px; font-weight: 700; line-height: 1.8; }
-        .result-img { width: 160px; height: auto; margin-bottom: 25px; object-fit: contain; }
+        /* ပုံ Box တစ်ခုလုံးအပြည့်ပေါ်စေရန် padding နှင့် border-radius ချိန်ညှိခြင်း */
+        .red-noti-card { background: #f0f4ff !important; border: 2px solid #cbd5e1 !important; box-shadow: 0 15px 35px rgba(15, 44, 89, 0.1) !important; min-height: 380px !important; padding: 15px !important; overflow: hidden; }
+        
+        /* ပုံကို Card Box ၏ အရွယ်အစားအတိုင်း အပြည့်အစုံ ဆန့်ထွက်ပေါ်စေရန် */
+        .result-img { width: 100%; height: 100%; max-height: 350px; object-fit: contain; display: block; }
     </style>
 </head>
 <body>
 
-<!-- Logo ထည့်ရန်နေရာ -->
-<div class="logo-container">
-    <img src="logo.png" alt="Mandalar Hospital Logo">
-</div>
-
-<div id="successToast" class="toast-notification">💚 Thank you for your support!</div>
+<div id="successToast" class="toast-notification">အကြံပြုချက်အတွက် ကျေးဇူးတင်ပါသည်။</div>
 
 <div class="container">
     <div class="header-container">
-        <div id="deptDisplay" class="dept-banner">CUSTOMER SERVICE</div>
+        <div id="deptDisplay" class="dept-banner">ဧည့်ကြိုကောင်တာ</div>
     </div>
-    <div class="dept-subtitle">MANDALAR HOSPITAL — We are here to serve you better.</div>
-
+    
     <div id="box1" class="feedback-card" style="display: flex;">
-        <h1>How was your service today?</h1>
+        <h4>လူကြီးမင်း တွေ့ကြုံခဲ့ရသော ဝန်ဆောင်မှုများနှင့် ပက်သက်၍ အကြံပြုနိုင်ပါသည်။</h4>
         <div class="box-subtitle">Your feedback helps us improve.</div>
         <div class="emoji-row">
-            <div class="emoji-box" onclick="selectScore('Excellent', 5)"><span class="emoji">😍</span><span class="label" style="color:#10b981">EXCELLENT</span></div>
-            <div class="emoji-box" onclick="selectScore('Good', 4)"><span class="emoji">😊</span><span class="label" style="color:#059669">GOOD</span></div>
-            <div class="emoji-box" onclick="selectScore('Average', 3)"><span class="emoji">😐</span><span class="label" style="color:#d97706">AVERAGE</span></div>
-            <div class="emoji-box" onclick="selectScore('Fair', 2)"><span class="emoji">🙁</span><span class="label" style="color:#ea580c">FAIR</span></div>
-            <div class="emoji-box" onclick="selectScore('Poor', 1)"><span class="emoji">😡</span><span class="label" style="color:#dc2626">POOR</span></div>
+            <div class="emoji-box" onclick="selectScore('အလွန်ကောင်း', 5)"><span class="emoji">🤩</span><span class="label" style="color:#10b981">အလွန်ကောင်း</span></div>
+            <div class="emoji-box" onclick="selectScore('ကောင်း', 4)"><span class="emoji">😊</span><span class="label" style="color:#059669">ကောင်း</span></div>
+            <div class="emoji-box" onclick="selectScore('သင့်တင့်', 3)"><span class="emoji">🙂</span><span class="label" style="color:#d97706">သင့်တင့်</span></div>
+            <div class="emoji-box" onclick="selectScore('ညံ့', 2)"><span class="emoji">😕</span><span class="label" style="color:#ea580c">ညံ့</span></div>
+            <div class="emoji-box" onclick="selectScore('အလွန်ညံ့', 1)"><span class="emoji">🙁</span><span class="label" style="color:#dc2626">အလွန်ညံ့</span></div>
         </div>
     </div>
 
     <div id="box2" class="feedback-card">
         <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
-        <h3>What can we improve?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
+        <h3>What can we improve?<br><span style="font-weight:normal; font-size:16px; color:#475569">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
         <div class="reason-grid">
-            <button class="reason-btn" onclick="selectReason('Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:14px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
-            <button class="reason-btn" onclick="selectReason('Staff attitude')">Staff attitude<br><span style="font-weight:normal; font-size:14px; color:#64748b">(ဝန်ထမ်း ဆက်ဆံရေး)</span></button>
-            <button class="reason-btn" onclick="selectReason('Information not clear')">Information not clear<br><span style="font-weight:normal; font-size:14px; color:#64748b">(သတင်းအချက်အလက် မရှင်းလင်းခြင်း)</span></button>
-            <button class="reason-btn" onclick="selectReason('Other')">Other (Please specify)<br><span style="font-weight:normal; font-size:14px; color:#64748b">(အခြားအကြောင်းအရာ ရေးရန်)</span></button>
+            <button class="reason-btn" onclick="selectReason('Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:13px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
+            <button class="reason-btn" onclick="selectReason('Staff attitude')">Staff attitude<br><span style="font-weight:normal; font-size:13px; color:#64748b">(ဝန်ထမ်း ဆက်ဆံရေး)</span></button>
+            <button class="reason-btn" onclick="selectReason('Information not clear')">Information not clear<br><span style="font-weight:normal; font-size:13px; color:#64748b">(သတင်းအချက်အလက် မရှင်းလင်းခြင်း)</span></button>
+            <button class="reason-btn" onclick="selectReason('Other')">Other (Please specify)<br><span style="font-weight:normal; font-size:13px; color:#64748b">(အခြားအကြောင်းအရာ ရေးရန်)</span></button>
         </div>
     </div>
 
     <div id="box3" class="feedback-card">
-        <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
+        <h3>Any additional comments?<br><span style="font-weight:normal; font-size:16px; color:#475569">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
         <textarea id="commentText" placeholder="Type your comments here..."></textarea>
         <br>
         <div class="btn-row">
@@ -146,10 +138,9 @@
         </div>
     </div>
 
+    <!-- ပုံ Box အပြည့်ပေါ်မည့် Card -->
     <div id="box5" class="feedback-card red-noti-card">
-        <div class="red-text">
-            လူကြီးမင်း၏ အဆင်မပြေမှုအတွက်<br>တောင်းပန်ပါတယ်ခင်ဗျာ။<br>ကြိုးစားပါဦးမယ်ခင်ဗျာ။
-        </div>
+        <img src="thankyou.png" alt="Thank You" class="result-img">
     </div>
 </div>
 
@@ -157,13 +148,22 @@
     window.currentScoreText = "";
     window.currentScoreNum = 0;
     window.currentReason = "";
-    let currentDepartment = "Customer Service";
+    let currentDepartment = "ဧည့်ကြိုကောင်တာ";
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const deptParam = urlParams.get('dept');
+        
         if (deptParam) {
-            currentDepartment = deptParam.replace(/([A-Z])/g, ' $1').trim();
+            if (deptParam === 'Pharmacy' || deptParam === 'ဆေးကောင်တာ') {
+                currentDepartment = 'ဆေးကောင်တာ';
+            } else if (deptParam === 'Cashier' || deptParam === 'ငွေရှင်းကောင်တာ') {
+                currentDepartment = 'ငွေရှင်းကောင်တာ';
+            } else if (deptParam === 'CustomerService' || deptParam === 'ဧည့်ကြိုကောင်တာ') {
+                currentDepartment = 'ဧည့်ကြိုကောင်တာ';
+            } else {
+                currentDepartment = deptParam.replace(/([A-Z])/g, ' $1').trim();
+            }
         }
         document.getElementById('deptDisplay').innerText = currentDepartment;
     };
@@ -174,7 +174,7 @@
         window.currentReason = ""; 
         document.getElementById('commentText').value = ""; 
 
-        if (scoreNum >= 3) {
+        if (scoreNum > 3) {
             submitData(); 
         } else {
             document.getElementById('box1').style.display = 'none';
@@ -203,7 +203,7 @@
     }
 
     function showResultScreen() {
-        if (window.currentScoreNum >= 3) {
+        if (window.currentScoreNum > 3) {
             const toast = document.getElementById('successToast');
             toast.classList.add('show');
             setTimeout(() => {
@@ -256,16 +256,14 @@
         window.currentScoreText = "";
         window.currentScoreNum = 0;
         window.currentReason = "";
-
-    
     }
 </script>
 <script>
-    // အောက်ဆုံးမှာ ဒီ code လေးကို ထပ်ပေါင်းလိုက်ပါ
-    if ('serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('Service Worker Registered'));
+          .then(() => console.log('Service Worker Registered'));
+      }
+</script>
 
-        </script>       
 </body>
 </html>
