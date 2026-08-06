@@ -13,43 +13,86 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             text-align: center; 
-            background-image: url('background.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: contain;
-            background-color: #f8fafc;
-            margin: 0; padding: 20px; user-select: none; min-height: 100vh;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
+            margin: 0; padding: 20px 15px; user-select: none; min-height: 100vh;
             box-sizing: border-box; display: flex; flex-direction: column;
             justify-content: center; align-items: center; position: relative;
+            overflow-x: hidden;
+        }
+         /* Logo Positioning - ညာဘက်အပေါ်ထောင့်တွင် အသေကပ်ရန် */
+        .top-logo {
+            position: fixed !important;
+            top: -25px !important;
+            right: -10px !important;
+            left: auto !important;
+            bottom: auto !important;
+            z-index: 99999 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
         }
 
-        .container { max-width: 900px; width: 100%; margin: 0 auto; position: relative; }
+        .top-logo img {
+            width: 280px !important;
+            height: auto !important;
+            display: block !important;
+        }
+        
+        .container { 
+            max-width: 100%; 
+            width: 100%; 
+            margin: 5px auto 0 auto; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
         
         .header-container {
             background: rgba(255, 255, 255, 0.95); padding: 12px 35px;
             border-radius: 14px; box-shadow: 0 6px 20px rgba(15, 44, 89, 0.08);
             border: 2px solid #e2e8f0; border-bottom: 4px solid #d4af37; 
-            margin-bottom: 12px; display: inline-block; min-width: 280px;
+            margin-bottom: 15px; display: inline-block; min-width: 280px;
         }
         
         .dept-banner { color: #0f2c59; font-size: 26px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
         
         .feedback-card { 
-            background: #ffffff; padding: 40px 35px; border-radius: 28px; 
-            box-shadow: 0 25px 50px rgba(15, 44, 89, 0.1); border: 1px solid #e2e8f0;
-            width: 100%; min-height: 450px; display: none; flex-direction: column; /* <--- ဒီနေရာမှာ min-height ကို တိုးပေးပါ (ဥပမာ - 450px သို့မဟုတ် 500px) */
-            justify-content: center; align-items: center; position: relative; 
+            background: #ffffff; 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 25px 50px rgba(15, 44, 89, 0.1); 
+            border: 1px solid #e2e8f0;
+            width: 100%;        
+            max-width: 100%; /* Background width အတိုင်း အပြည့်ဆန့်ထွက်စေရန် */
+            min-height: 500px;   
+            display: none;       
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            position: relative; 
             box-sizing: border-box; 
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-        h4 { color: #0f2c59; font-size: 24px; margin-bottom: 8px; font-weight: 800; margin-top: 0; white-space: nowrap; }/* <--- ဒီနေရာက font-size ကို တိုးပေးပါ (ဥပမာ - 28px သို့မဟုတ် 30px) */
+        h4 { 
+            color: #0f2c59; 
+            font-size: 24px; 
+            margin-bottom: 8px; 
+            font-weight: 800; 
+            margin-top: 0; 
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
         .box-subtitle { color: #475569; font-size: 17px; margin-bottom: 35px; font-weight: 600; }
-        h3 { color: #0f2c59; margin-bottom: 25px; font-size: 22px; line-height: 1.4; font-weight: 800; margin-top: 0; }
+        h3 { color: #0f2c59; margin-bottom: 15px; font-size: 19px; line-height: 1.4; font-weight: 800; margin-top: 0; word-break: break-word; }
         
-        .emoji-row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; overflow: hidden; width: 100%; }
+        .emoji-row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; width: 100%; }
         
         .emoji-box { 
             display: flex; flex-direction: column; align-items: center; background: #e1ebff; 
@@ -58,25 +101,28 @@
         }
         .emoji-box:active { transform: scale(0.92); background-color: #cbd5e1; }
         .emoji-box:hover { border-color: #0f2c59; box-shadow: 0 10px 20px rgba(15, 44, 89, 0.06); }
-        .emoji { font-size: 50px; margin-bottom: 10px; transition: transform 0.2s; } 
+        .emoji { font-size: 45px; margin-bottom: 10px; transition: transform 0.2s; } 
         .emoji-box:hover .emoji { transform: scale(1.12); }
-        .label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }/* <--- ဒီနေရာက font-size ကို တိုးပေးပါ (ဥပမာ - 15px သို့မဟုတ် 16px) */
+        .label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; width: 100%; }
-        .reason-btn { background: #e1ebff; border: 2px solid #cbd5e1; padding: 18px 12px; border-radius: 16px; font-size: 16px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .reason-btn:active { background: #f1f5f9; transform: scale(0.97); }
-        .reason-btn:hover { border-color: #0f2c59; color: #0f2c59; }
+        .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px; width: 100%; }
+        .reason-btn { background: #e1ebff; border: 2px solid #cbd5e1; padding: 12px 8px; border-radius: 14px; font-size: 14px; font-weight: bold; color: #334155; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); text-align: center; }
+        .reason-btn:active { transform: scale(0.97); }
         
-        textarea { width: 100%; height: 120px; padding: 15px; border-radius: 14px; border: 2px solid #cbd5e1; font-size: 16px; box-sizing: border-box; resize: none; margin-bottom: 15px; outline: none; transition: 0.2s; }
-        textarea:focus { border-color: #0f2c59; box-shadow: 0 0 0 4px rgba(15, 44, 89, 0.1); }
-        .btn-row { display: flex; justify-content: center; gap: 12px; }
-        
-        .submit-btn { background: #0f2c59; color: white; border: none; padding: 15px 50px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(15, 44, 89, 0.2); }
+        /* Multi-select Selected State Style */
+        .reason-btn.selected {
+            background: #0f2c59 !important;
+            color: white !important;
+            border-color: #0f2c59 !important;
+        }
+        .reason-btn.selected span {
+            color: #cbd5e1 !important;
+        }
+
+        .submit-btn { background: #0f2c59; color: white; border: none; padding: 14px 40px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(15, 44, 89, 0.2); width: 100%; }
         .submit-btn:active { background: #081833; transform: scale(0.97); }
-        .back-btn { background: #64748b; color: white; border: none; padding: 15px 35px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s; }
-        .back-btn:active { background: #475569; transform: scale(0.97); }
         
-        .corner-back { position: absolute; top: 18px; right: 20px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 6px 16px; font-size: 13px; font-weight: bold; border-radius: 25px; cursor: pointer; transition: 0.2s; }
+        .corner-back { position: absolute; top: 15px; right: 20px; background: #f1f5f9; color: #475569; border: 2px solid #e2e8f0; padding: 6px 16px; font-size: 13px; font-weight: bold; border-radius: 25px; cursor: pointer; transition: 0.2s; }
         .corner-back:active { background: #e2e8f0; }
         
         .toast-notification {
@@ -89,14 +135,18 @@
         }
         .toast-notification.show { top: 25px; }
 
-        /* ပုံ Box တစ်ခုလုံးအပြည့်ပေါ်စေရန် padding နှင့် border-radius ချိန်ညှိခြင်း */
         .red-noti-card { background: #f0f4ff !important; border: 2px solid #cbd5e1 !important; box-shadow: 0 15px 35px rgba(15, 44, 89, 0.1) !important; min-height: 380px !important; padding: 15px !important; overflow: hidden; }
         
-        /* ပုံကို Card Box ၏ အရွယ်အစားအတိုင်း အပြည့်အစုံ ဆန့်ထွက်ပေါ်စေရန် */
         .result-img { width: 100%; height: 100%; max-height: 350px; object-fit: contain; display: block; }
     </style>
 </head>
 <body>
+    <div class="top-logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+
+    <div class="main-container">
+    </div>
 
 <div id="successToast" class="toast-notification">အကြံပြုချက်အတွက် ကျေးဇူးတင်ပါသည်။</div>
 
@@ -106,7 +156,7 @@
     </div>
     
     <div id="box1" class="feedback-card" style="display: flex;">
-        <h4>လူကြီးမင်း တွေ့ကြုံခဲ့ရသော ဝန်ဆောင်မှုများနှင့် ပက်သက်၍ အကြံပြုနိုင်ပါသည်။</h4>
+        <h4>ဝန်ဆောင်မှုများနှင့် ပတ်သက်၍ အကြံပြုနိုင်ပါသည်။</h4>
         <div class="box-subtitle">Your feedback helps us improve.</div>
         <div class="emoji-row">
             <div class="emoji-box" onclick="selectScore('အလွန်ကောင်း', 5)"><span class="emoji">🤩</span><span class="label" style="color:#10b981">အလွန်ကောင်း</span></div>
@@ -119,26 +169,18 @@
 
     <div id="box2" class="feedback-card">
         <button class="corner-back" onclick="goBack(1)">⬅ Back</button>
-        <h3>What can we improve?<br><span style="font-weight:normal; font-size:16px; color:#475569">(ဘာများ ပြင်ဆင်ရန် လိုအပ်ပါသလဲ)</span></h3>
+        <h3>What can we improve?<br><span style="font-weight:normal; font-size:14px; color:#475569">(ပြင်ဆင်လိုသည့် အချက်များကို တစ်ခု (သို့) တစ်ခုထက်ပို၍ ရွေးချယ်နိုင်ပါသည်)</span></h3>
         <div class="reason-grid">
-            <button class="reason-btn" onclick="selectReason('Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:13px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
-            <button class="reason-btn" onclick="selectReason('Staff attitude')">Staff attitude<br><span style="font-weight:normal; font-size:13px; color:#64748b">(ဝန်ထမ်း ဆက်ဆံရေး)</span></button>
-            <button class="reason-btn" onclick="selectReason('Information not clear')">Information not clear<br><span style="font-weight:normal; font-size:13px; color:#64748b">(သတင်းအချက်အလက် မရှင်းလင်းခြင်း)</span></button>
-            <button class="reason-btn" onclick="selectReason('Other')">Other (Please specify)<br><span style="font-weight:normal; font-size:13px; color:#64748b">(အခြားအကြောင်းအရာ ရေးရန်)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Long waiting time')">Long waiting time<br><span style="font-weight:normal; font-size:11px; color:#64748b">(စောင့်ဆိုင်းချိန် ကြာမြင့်ခြင်း)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Staff attitude')">Staff Service & Communication<br><span style="font-weight:normal; font-size:11px; color:#64748b">(ဝန်ထမ်းများ၏ ဆက်ဆံရေး)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Information not clear')">Information not clear<br><span style="font-weight:normal; font-size:11px; color:#64748b">(သတင်းအချက်အလက် မရှင်းလင်းခြင်း)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Hospital Facilities')">Hospital Facilities<br><span style="font-weight:normal; font-size:11px; color:#64748b">(ဆေးရုံ၏ နေရာထိုင်ခင်း)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Billing & Payment Process')">Billing & Payment Process<br><span style="font-weight:normal; font-size:11px; color:#64748b">(ဆေးကုသစရိတ် ပေးချေခြင်း)</span></button>
+            <button class="reason-btn" onclick="toggleReason(this, 'Cleanliness & Hygiene')">Cleanliness & Hygiene<br><span style="font-weight:normal; font-size:11px; color:#64748b">(သန့်ရှင်းသပ်ရပ်မှု)</span></button>
         </div>
+        <button class="submit-btn" onclick="submitMultiData()">SUBMIT</button>
     </div>
 
-    <div id="box3" class="feedback-card">
-        <h3>Any additional comments?<br><span style="font-weight:normal; font-size:18px; color:#475569">(ဖြည့်စွက်အကြံပြုချက်များ)</span></h3>
-        <textarea id="commentText" placeholder="Type your comments here..."></textarea>
-        <br>
-        <div class="btn-row">
-            <button class="back-btn" onclick="goBack(2)">⬅ BACK</button>
-            <button class="submit-btn" onclick="submitData()">SUBMIT</button>
-        </div>
-    </div>
-
-    <!-- ပုံ Box အပြည့်ပေါ်မည့် Card -->
     <div id="box5" class="feedback-card red-noti-card">
         <img src="thankyou.png" alt="Thank You" class="result-img">
     </div>
@@ -147,7 +189,7 @@
 <script>
     window.currentScoreText = "";
     window.currentScoreNum = 0;
-    window.currentReason = "";
+    window.selectedReasons = [];
     let currentDepartment = "ဧည့်ကြိုကောင်တာ";
 
     window.onload = function() {
@@ -171,8 +213,10 @@
     function selectScore(scoreText, scoreNum) {
         window.currentScoreText = scoreText; 
         window.currentScoreNum = scoreNum;
-        window.currentReason = ""; 
-        document.getElementById('commentText').value = ""; 
+        window.selectedReasons = []; 
+
+        // Reset all buttons state
+        document.querySelectorAll('.reason-btn').forEach(btn => btn.classList.remove('selected'));
 
         if (scoreNum > 3) {
             submitData(); 
@@ -182,23 +226,25 @@
         }
     }
 
-    function selectReason(reason) {
-        window.currentReason = reason;
-        if (reason === 'Other') {
-            document.getElementById('box2').style.display = 'none';
-            document.getElementById('box3').style.display = 'flex'; 
+    function toggleReason(btn, reasonText) {
+        const index = window.selectedReasons.indexOf(reasonText);
+        if (index > -1) {
+            window.selectedReasons.splice(index, 1);
+            btn.classList.remove('selected');
         } else {
-            submitData(); 
+            window.selectedReasons.push(reasonText);
+            btn.classList.add('selected');
         }
+    }
+
+    function submitMultiData() {
+        submitData();
     }
 
     function goBack(step) {
         if (step === 1) {
             document.getElementById('box2').style.display = 'none';
             document.getElementById('box1').style.display = 'flex';
-        } else if (step === 2) {
-            document.getElementById('box3').style.display = 'none';
-            document.getElementById('box2').style.display = 'flex';
         }
     }
 
@@ -213,7 +259,6 @@
         } else {
             document.getElementById('box1').style.display = 'none';
             document.getElementById('box2').style.display = 'none';
-            document.getElementById('box3').style.display = 'none';
             document.getElementById('box5').style.display = 'flex';
             setTimeout(() => {
                 resetApp();
@@ -224,7 +269,7 @@
     function submitData() {
         const url = 'https://script.google.com/macros/s/AKfycbyZJ_NOiey5SfzRf93MMMmI4bJGzx-LBdtwhoGnTpIVa9cVdA7_rro4bIBciQNN_QL_/exec'; 
         
-        const comment = document.getElementById('commentText').value;
+        const reasonsString = window.selectedReasons.join(', ');
 
         const now = new Date();
         const safeDateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
@@ -233,8 +278,8 @@
             "Date": safeDateStr,
             "Department": currentDepartment, 
             "Score": window.currentScoreText, 
-            "Reason": window.currentReason,   
-            "Comment": comment                
+            "Reason": reasonsString,   
+            "Comment": ""                
         };
 
         showResultScreen();
@@ -251,11 +296,11 @@
     function resetApp() {
         document.getElementById('box5').style.display = 'none';
         document.getElementById('box2').style.display = 'none';
-        document.getElementById('box3').style.display = 'none';
         document.getElementById('box1').style.display = 'flex';
         window.currentScoreText = "";
         window.currentScoreNum = 0;
-        window.currentReason = "";
+        window.selectedReasons = [];
+        document.querySelectorAll('.reason-btn').forEach(btn => btn.classList.remove('selected'));
     }
 </script>
 <script>
