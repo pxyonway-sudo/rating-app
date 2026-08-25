@@ -229,11 +229,21 @@
         document.getElementById('deptDisplay').innerText = currentDepartment;
     };
 
+    // variable တွေကို ဒီလိုထည့်ပါ
+    window.currentScoreText = "";
+    window.currentScoreNum = 0;
+    let selectedReasons = [];
+    window.currentReason = "";
+
     function selectScore(scoreText, scoreNum) {
         window.currentScoreText = scoreText; 
         window.currentScoreNum = scoreNum;
+        selectedReasons = [];
         window.currentReason = ""; 
         document.getElementById('commentText').value = ""; 
+        
+        // ရွေးချယ်ထားတဲ့ ခလုတ်ဟောင်းများရဲ့ အရောင်အသားပေးမှုကို ရှင်းထုတ်ပါ
+        document.querySelectorAll('.reason-btn').forEach(btn => btn.classList.remove('selected'));
 
         if (scoreNum > 3) {
             submitData(); 
@@ -244,14 +254,26 @@
         }
     }
 
-    function selectReason(reason) {
-        window.currentReason = reason;
-        if (reason === 'Other') {
-            document.getElementById('box2').style.display = 'none';
-            document.getElementById('box3').style.display = 'flex'; 
+    // Single-select (selectReason) အစား Multi-select (toggleReason) ကိုသုံးရန် ဤသို့ထည့်ပါ
+    function toggleReason(btn, reason) {
+        if (selectedReasons.includes(reason)) {
+            selectedReasons = selectedReasons.filter(r => r !== reason);
+            btn.classList.remove('selected');
         } else {
-            submitData(); 
+            selectedReasons.push(reason);
+            btn.classList.add('selected');
         }
+    }
+
+    // Reason တွေရွေးပြီး SUBMIT ခလုတ်နှိပ်မှ ဒီ function အလုပ်လုပ်ပါမယ်
+    function submitReasons() {
+        if (selectedReasons.length === 0) {
+            alert("ကျေးဇူးပြု၍ အနည်းဆုံး တစ်ခုခု ရွေးချယ်ပါ။");
+            return;
+        }
+        window.currentReason = selectedReasons.join(', ');
+        submitData();
+        showResultScreen();
     }
 
     function goBack(step) {
@@ -265,22 +287,14 @@
     }
 
     function showResultScreen() {
-       /* if (window.currentScoreNum > 3) {
-            const toast = document.getElementById('successToast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-                resetApp();
-            }, 4000); // <-- ဒီနေရာမှာ ပြင်ပါ (ဥပမာ - 5 စက္ကန့်ဆိုလျှင် 5000 လို့ပြောင်းပါ)
-        } else { */
-            document.getElementById('box1').style.display = 'none';
-            document.getElementById('box2').style.display = 'none';
-            document.getElementById('box3').style.display = 'none';
-            document.getElementById('box5').style.display = 'flex';
-            setTimeout(() => {
-                resetApp();
-            }, 4000); // <-- ဒီနေရာမှာလည်း ပြင်ပါ (ဥပမာ - 5 စက္ကန့်ဆိုလျှင် 5000 လို့ပြောင်းပါ)
-        }
+        document.getElementById('box1').style.display = 'none';
+        document.getElementById('box2').style.display = 'none';
+        document.getElementById('box3').style.display = 'none';
+        document.getElementById('box5').style.display = 'flex';
+        setTimeout(() => {
+            resetApp();
+        }, 4000);
+    }
     
 
     function submitData() {
